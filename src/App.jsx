@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
+import { useAuthContext } from '@asgardeo/auth-react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { state, signIn, signOut } = useAuthContext();
 
   return (
     <>
@@ -16,9 +18,13 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      {state.isAuthenticated ? (
+        <h1>Vite + React + Asgaradeo Dashboard</h1>
+      ): (<h1>Vite + React + Asgaradeo Please Login</h1>
+    )}
+      
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => setCount(count => count + 1)}>
           count is {count}
         </button>
         <p>
@@ -28,8 +34,13 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      {state.isAuthenticated ? (
+        <button onClick={() => signOut()}>Logout</button>
+      ) : (
+        <button onClick={() => signIn()}>Login</button>
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
