@@ -8,6 +8,19 @@ function App() {
   const [count, setCount] = useState(0);
   const { state, signIn, signOut } = useAuthContext();
 
+  const consoleFunc = () => {
+    const signInRedirectURL = import.meta.env.VITE_SIGNIN_REDIRECT_URL;
+    const signOutRedirectURL = import.meta.env.VITE_SIGNOUT_REDIRECT_URL;
+    const clientID = import.meta.env.VITE_CLIENT_ID;
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+  
+    console.log("signInRedirectURL:", signInRedirectURL);
+    console.log("signOutRedirectURL:", signOutRedirectURL);
+    console.log("clientID:", clientID);
+    console.log("baseUrl:", baseUrl);
+  };
+  
+  
   return (
     <>
       <div>
@@ -31,6 +44,7 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+      <button onClick={consoleFunc}>Console</button>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
